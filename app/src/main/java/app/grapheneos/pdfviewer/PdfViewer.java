@@ -644,12 +644,17 @@ public class PdfViewer extends AppCompatActivity implements LoaderManager.Loader
             mDocumentState = STATE_END;
         }
 
-        enableDisableMenuItem(menu.findItem(R.id.action_open), getWebViewRelease() >= MIN_WEBVIEW_RELEASE);
-        enableDisableMenuItem(menu.findItem(R.id.action_share), mUri != null);
         enableDisableMenuItem(menu.findItem(R.id.action_next), mPage < mNumPages);
         enableDisableMenuItem(menu.findItem(R.id.action_previous), mPage > 1);
-        enableDisableMenuItem(menu.findItem(R.id.action_save_as), mUri != null);
-
+        
+        //
+        // The purpose of this fork is to disable the ability to open documents, share or save PDF.
+        // Permanently disabling these options here.
+        //
+        enableDisableMenuItem(menu.findItem(R.id.action_open), false);
+        enableDisableMenuItem(menu.findItem(R.id.action_share), false);
+        enableDisableMenuItem(menu.findItem(R.id.action_save_as), false);
+        
         return true;
     }
 
